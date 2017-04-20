@@ -60,7 +60,7 @@ while (h<130):
   ej17bsuma = binomial_neg(100,h,0.80) + ej17bsuma
   h = h+1
 ej17b = 1-ej17bsuma
-'''
+
 
 for n in range(130,150):
     ej17csum = 0
@@ -70,7 +70,23 @@ for n in range(130,150):
         ej17c = 1- ej17csum
         i = i+1
     print(n,ej17c)
-    
 
+for n in range(700,780):
+    rapida = (binomial_neg(1,n,1.00/120))**4
+    lenta = binomial_neg(1,n,1.00/360)
+    print(n,rapida,lenta)
 
-#print(ej17b)
+for i in range(4,9):
+    afa = hipergeometrica(i,20,8,16)
+    print("#hombres=",i,afa)
+'''
+i=0
+ej8asum=0
+ej8bsum=0
+while(i<10):
+    ej8asum = binomial(i,500,0.01)+ej8asum
+    ej8bsum = hipergeometrica(i,5000,1000,500)+ej8bsum
+    i=i+1
+ej8a = 1-ej8asum
+ej8b = 1-ej8bsum
+print(ej8b)
