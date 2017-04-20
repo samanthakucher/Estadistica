@@ -1,7 +1,15 @@
 import math as m
+import numpy as np
+
+def stirling(a):
+	#aprox de ln(n!) para n grande
+	return a*(m.log(a))-a+0.5*(m.log(2*np.pi*a))+1/(12*a)
 
 def combinatoria(n,k):
 	return float(m.factorial(n)/(m.factorial(n-k)*m.factorial(k)))
+
+def combinatoria_grande(n,k):
+	return float(m.exp(float(stirling(n)-stirling(k)-stirling(n-k))))
 
 def binomial(k, n, p):
 	#Variable aleatoria = k (cantidad de exitos)
@@ -18,9 +26,15 @@ def hipergeometrica(k, t, n, q):
 	#k exitos, t cosas en total, q cosas que quiero, n intentos
 	return (combinatoria(q,k)*combinatoria(t-q,n-k))/combinatoria(t,n)
 
+def hipergeometrica_grande(k,t,n,q):
+	return (combinatoria_grande(q,k)*combinatoria_grande(t-q,n-k))/combinatoria_grande(t,n)
+
 def poisson(k,mu):
-  #k exitos, mu=n*p
-  return (m.exp(-mu)*(mu**k))/m.factorial(k)
+	#k exitos, mu=n*p
+	return (m.exp(-mu)*(mu**k))/m.factorial(k)
+
+
+
 
 #GUIA 2
 '''
@@ -79,14 +93,32 @@ for n in range(700,780):
 for i in range(4,9):
     afa = hipergeometrica(i,20,8,16)
     print("#hombres=",i,afa)
-'''
+
 i=0
 ej8asum=0
 ej8bsum=0
 while(i<10):
     ej8asum = binomial(i,500,0.01)+ej8asum
-    ej8bsum = hipergeometrica(i,5000,1000,500)+ej8bsum
+    ej8bsum = hipergeometrica_grande(i,5000,1000,500)+ej8bsum #ERROR!
     i=i+1
 ej8a = 1-ej8asum
 ej8b = 1-ej8bsum
-print(ej8b)
+
+ej13 = m.degrees(m.acos(m.sqrt(9.43/16.53))) #da =! que la guia
+'''
+for n in range(2,30):
+    ej10asum = 0
+    i = 0
+    while (i<2):
+        ej10asum = binomial(i,n,0.182) + ej10asum
+        ej10a = 1- ej10asum
+        i = i+1
+    if ej10a>0.90:
+	print(n,ej10a)
+
+for k in range(0,10):
+	pgol = binomial(k,20,0.182) #prob de meter k goles
+	print(k, pgol)
+golprom = 20*0.182
+
+#print(golprom)
