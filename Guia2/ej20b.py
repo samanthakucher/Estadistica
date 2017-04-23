@@ -20,6 +20,9 @@ def binomial(k, n, p):
 	#Variable aleatoria = k (cantidad de exitos)
 	#p = cte
 	return combinatoria(n,k)*(p**k)*((1-p)**(n-k))
+def poisson(k,mu):
+	#k exitos, mu=n*p
+	return (m.exp(-mu)*(mu**k))/m.factorial(k)
  
 #EXPERIMENTO
 prob = 0.75 #input("Probabilidad = ") 
@@ -41,14 +44,19 @@ for i in range(0,T):
     fracasos_vector.append(fracasos)
  
 #TEORICO
-exitos_esperados = []
+exitos_esperados_b = []
+exitos_esperados_p = []
 for i in range(1,M+1):
-    exito_i = binomial(i,M,prob)
-    exitos_esperados.append(exito_i)
+    exito_i_b = binomial(i,M,prob)
+    exito_i_p = poisson(i, prob*M)
+    exitos_esperados_b.append(exito_i_b)
+    exitos_esperados_p.append(exito_i_p)
 
 #GRAFICOS  
+
 plt.hist(exitos_vector,bins = M,range=[0,M], color = 'c', alpha=0.5, normed=True)  
-plt.plot(intentos,exitos_esperados, 'r-', label = "Distribucion binomial")
+plt.plot(intentos,exitos_esperados_b, 'r-', label = "Distribucion binomial")
+plt.plot(intentos,exitos_esperados_p, 'g-', label = "Poisson")
 plt.xticks(range(0,M))
 plt.legend(loc=2, borderaxespad=0.)
 plt.title('Histograma')
