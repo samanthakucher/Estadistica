@@ -34,15 +34,16 @@ for i in range(0,T):
     fracasos_vector.append(fracasos)
 
 x = np.arange(0,30) #eje x del histograma
+x1 = np.arange(0.5,30.5)
 bines = 30
 #GRAFICOS  
 fig, ax = plt.subplots(1, 1)
 #ax.hist(exitos_vector,bins = 30,range=[0,30], color = 'r', alpha=0.5, normed=True)
-n, bins, patches = ax.hist(exitos_vector,bins = bines,range=[0,bines], color = 'c', alpha=0.5, normed=True)  
+n, bins, patches = ax.hist(exitos_vector,bins = x1,range=[0,bines], color = 'c', alpha=0.5, normed=True)  
 #plt.plot(intentos,exitos_esperados_b, 'r-', label = "Distribucion binomial")
 #plt.plot(intentos,exitos_esperados_p, 'g-', label = "Poisson")
-ax.plot(x, poisson.pmf(x, mu), 'bo', ms=8, label='poisson')
-ax.vlines(x, 0, poisson.pmf(x, mu), colors='b', lw=5, alpha=0.5)
+ax.plot(x, poisson.pmf(x, mu), 'go', ms=8, label='poisson', alpha=0.9)
+#ax.vlines(x, 0, poisson.pmf(x, mu), colors='b', lw=5, alpha=0.5)
 plt.xticks(range(0,bines,5))
 plt.legend(loc=2, borderaxespad=0.)
 ax.set_xlabel('Numero de fotones detectados')
@@ -50,3 +51,4 @@ ax.set_ylabel('Cantidad de ocurrencias (normalizada)')
 ax.set_title('Histograma')
 fig.tight_layout()
 plt.show()
+
