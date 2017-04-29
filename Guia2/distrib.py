@@ -1,5 +1,6 @@
 import math as m
 import numpy as np
+from matplotlib import pyplot as plt
 
 def stirling(a):
 	#aprox de ln(n!) para n grande
@@ -40,26 +41,21 @@ def poisson(k,mu):
 '''
 ej1 = binomial(3,10,1.00/6.00) 
 #OBS: si pongo 1/6 python los interpreta como enteros y me devuelve un entero
-
 ej2 = hipergeometrica(5, 100, 10, 80)
-
 i = 1
 ej6 = 0
 while (i<=25):
 	ej6 = binomial(i,25,1.00/36.00) + ej6
 	i = i+1
-
 j = 3
 ej7 = 0
 while (j<=5):
 	ej7 = hipergeometrica(j,10,5,5) + ej7
 	j = j+1
-
 ej9c2i = hipergeometrica(6,10,8,6)
 ej9c2ii = hipergeometrica(5,10,8,6)
 ej9c3 = hipergeometrica(6,10,7,6)
 ej9c4 = hipergeometrica(6,10,6,6)
-
 r = 0
 sumej14a = 0
 while (r<=7):
@@ -67,15 +63,12 @@ while (r<=7):
   r = r+1
 ej14a = 1 - sumej14a
 ej14b = 1 - binomial(0,365,0.0011)
-
 ej17bsuma = 0
 h = 100
 while (h<130):
   ej17bsuma = binomial_neg(100,h,0.80) + ej17bsuma
   h = h+1
 ej17b = 1-ej17bsuma
-
-
 for n in range(130,150):
     ej17csum = 0
     i = 0
@@ -84,16 +77,13 @@ for n in range(130,150):
         ej17c = 1- ej17csum
         i = i+1
     print(n,ej17c)
-
 for n in range(700,780):
     rapida = (binomial_neg(1,n,1.00/120))**4
     lenta = binomial_neg(1,n,1.00/360)
     print(n,rapida,lenta)
-
 for i in range(4,9):
     afa = hipergeometrica(i,20,8,16)
     print("#hombres=",i,afa)
-
 i=0
 ej8asum=0
 ej8bsum=0
@@ -103,9 +93,8 @@ while(i<10):
     i=i+1
 ej8a = 1-ej8asum
 ej8b = 1-ej8bsum
-
 ej13 = m.degrees(m.acos(m.sqrt(9.43/16.53))) #da =! que la guia
-'''
+
 for n in range(2,30):
     ej10asum = 0
     i = 0
@@ -120,5 +109,25 @@ for k in range(0,10):
 	pgol = binomial(k,20,0.182) #prob de meter k goles
 	print(k, pgol)
 golprom = 20*0.182
+'''
+
+
+ej3neg = []
+ej3bin10 = []
+ej3bin9 = []
+ej3bin11 = []
+cantidad = np.arange(45,75)
+for n in range(45,75):
+    ej3bin9.append(binomial(9,n,0.166))
+    ej3bin10.append(binomial(10,n,0.166))
+    ej3bin11.append(binomial(11,n,0.166))
+#plt.plot(cantidad, ej3neg, 'b-')
+plt.plot(cantidad, ej3bin9, 'r*', label = 'k = 9')
+plt.plot(cantidad, ej3bin10, 'g*', label = 'k = 10')
+plt.plot(cantidad, ej3bin11, 'b*', label = 'k = 11')
+plt.xticks(range(45,75))
+plt.grid()
+plt.legend(loc=2, borderaxespad=0.)
 
 #print(golprom)
+
