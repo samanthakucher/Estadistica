@@ -131,7 +131,7 @@ plt.legend(loc=2, borderaxespad=0.)
 
 #print(golprom)
 
-<<<<<<< HEAD
+
 l = 0
 suma = 0
 while (l<=2):
@@ -141,5 +141,3 @@ ej9a = 1 - suma
 ej9b = binomial(1,6,0.20)
 
 print(ej9b)
-=======
->>>>>>> 47c21a3771bf999298ef0ea9bea9e08bb084234d
