@@ -36,4 +36,12 @@ while (j<=5):
 	ej7 = hipergeometrica(j,10,5,5) + ej7
 	j = j+1
 
-print(ej7)
+l = 0
+suma = 0
+while (l<=2):
+	suma = binomial(l,10,0.20) +suma
+	l = l+1
+ej9a = 1 - suma
+ej9b = binomial(1,6,0.20)
+
+print(ej9b)
