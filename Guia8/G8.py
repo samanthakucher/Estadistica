@@ -50,8 +50,8 @@ lim = a/(2*np.sum(x)) #cota superior
 '''
 #6)
 P = np.array([18.71, 2.79, 13.61, 12.08, 1.89])
-F = np.array([4854, 2586, 3752, 3753, 2605])
-ti = np.array([200, 100, 150, 150, 100]) #t se llama la t-student
+F = np.array([4854.00, 2586.00, 3752.00, 3753.00, 2605.00])
+ti = np.array([200.00, 100.00, 150.00, 150.00, 100.00]) #t se llama la t-student
 tc, Fc = 100.00, 1021.00
 B = []
 sigmab2 = []
@@ -61,10 +61,15 @@ for i in range(0,5):
 #¡todos los brillos tienen el mismo sigma!
 A = np.matrix([[1, m.log(P[0],10)],[1, m.log(P[1],10)], [1, m.log(P[2],10)], [1, m.log(P[3],10)], [1, m.log(P[4],10)] ])
 At = A.getT()
-V = np.matrix([[sigmab2[0], 0, 0, 0, 0], [0, sigmab2[1], 0, 0, 0], [0, 0, sigmab2[2], 0, 0], [0, 0, 0, sigmab2[3], 0], [0, 0, 0, 0, sigmab2[4]]])
+cb = Fc/(tc**2) #covarianza de B
+V = np.matrix([[sigmab2[0], cb, cb, cb, cb], [cb, sigmab2[1], cb, cb, cb], [cb, cb, sigmab2[2], cb, cb], [cb, cb, cb, sigmab2[3], cb], [cb, cb, cb, cb, sigmab2[4]]])
 Vi = V.getI()
 mult = At*Vi*A
 Cov = mult.getI()
 Bm = np.matrix(B)
 Bt = Bm.getT()
 tita = Cov*At*Vi*Bt
+alfa, beta = tita[1], tita[0]
+ealfa, ebeta = np.sqrt(Cov[0,0]), np.sqrt(Cov[1,1])
+cab = Cov[0,1]
+print(alfa, ealfa, beta, ebeta, cab)
