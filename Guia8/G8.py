@@ -58,7 +58,6 @@ sigmab2 = []
 for i in range(0,5):
     B.append((F[i])/(ti[i])-Fc/tc)
     sigmab2.append((F[i])/((ti[i])**2)+Fc/(tc**2))
-#¡todos los brillos tienen el mismo sigma!
 A = np.matrix([[1, m.log(P[0],10)],[1, m.log(P[1],10)], [1, m.log(P[2],10)], [1, m.log(P[3],10)], [1, m.log(P[4],10)] ])
 At = A.getT()
 cb = Fc/(tc**2) #covarianza de B
