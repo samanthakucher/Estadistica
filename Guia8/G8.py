@@ -47,7 +47,7 @@ x = [ 4.2, 1.0, 0.1, 2.0, 1.5]
 N = len(x)
 a = chi2.ppf(q=0.90, df=2*N, loc=0, scale=1)
 lim = a/(2*np.sum(x)) #cota superior
-'''
+
 #6)
 P = np.array([18.71, 2.79, 13.61, 12.08, 1.89])
 F = np.array([4854.00, 2586.00, 3752.00, 3753.00, 2605.00])
@@ -72,3 +72,27 @@ alfa, beta = tita[1], tita[0]
 ealfa, ebeta = np.sqrt(Cov[0,0]), np.sqrt(Cov[1,1])
 cab = Cov[0,1]
 print(alfa, ealfa, beta, ebeta, cab)
+'''
+#8)
+x = np.linspace(0,0.01,500)
+alfa, betanum, n, k = 1.00, 1.00, 12341.00, 50.00
+alfaprima, betaprima = alfa+k, betanum+n-k
+pestimado = (alfa+k)/(alfa+betanum+n)
+funcion = []
+for y in x:
+    funcion.append(beta.pdf(x,alfaprima, betaprima))
+maximo = np.max(funcion) #para dividir en las lineas
+intervalo = beta.interval(alpha=0.9, a=alfaprima, b=betaprima, loc=0, scale=1)
+xint = np.linspace(intervalo[0],intervalo[1],200)
+plt.plot(x,beta.pdf(x,alfaprima,betaprima),'m', lw=2)
+plt.plot(pestimado, beta.pdf(pestimado,alfaprima,betaprima),'go', label = 'p estimado')
+for x in xint:
+    plt.axvline(x, ymin=0, ymax=beta.pdf(x,alfaprima,betaprima)/700.00, color = 'c', alpha = 0.5)
+plt.axvline(intervalo[0], ymin=0, ymax=beta.pdf(intervalo[0],alfaprima,betaprima)/maximo, color = 'c', label = 'intervalo 90% CL')
+plt.axvline(intervalo[1], ymin=0, ymax=beta.pdf(intervalo[1],alfaprima,betaprima)/maximo, color ='c')
+plt.legend(loc=1, borderaxespad=0.)
+plt.xlabel('x')
+plt.ylabel('Beta(51, 12292)')
+plt.xticks(np.arange(0,0.01,0.001))
+plt.grid()
+plt.show()
