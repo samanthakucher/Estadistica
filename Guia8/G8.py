@@ -72,7 +72,7 @@ alfa, beta = tita[1], tita[0]
 ealfa, ebeta = np.sqrt(Cov[0,0]), np.sqrt(Cov[1,1])
 cab = Cov[0,1]
 print(alfa, ealfa, beta, ebeta, cab)
-'''
+
 #8)
 x = np.linspace(0,0.01,500)
 alfa, betanum, n, k = 1.00, 1.00, 12341.00, 50.00
@@ -96,3 +96,7 @@ plt.ylabel('Beta(51, 12292)')
 plt.xticks(np.arange(0,0.01,0.001))
 plt.grid()
 plt.show()
+'''
+#10)
+pminfrec = beta.ppf(q=0.1, a=9, b=2, loc=0, scale=1)
+pminbayes = beta.ppf(q=0.1, a=10, b=2, loc=0, scale=1)
