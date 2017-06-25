@@ -96,7 +96,14 @@ plt.ylabel('Beta(51, 12292)')
 plt.xticks(np.arange(0,0.01,0.001))
 plt.grid()
 plt.show()
-'''
+
 #10)
 pminfrec = beta.ppf(q=0.1, a=9, b=2, loc=0, scale=1)
 pminbayes = beta.ppf(q=0.1, a=10, b=2, loc=0, scale=1)
+'''
+#11)
+#a)
+mufondo=3.1
+mu_medido_max = (chi2.ppf(q=0.9, df=12, loc=0, scale=1))/2.00
+mu_posta_max = mu_medido_max - mufondo
+print(mu_posta_max)
